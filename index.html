@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    //creating a rock paper scissors game that runs 5 rounds and prints the winner at the end
+
+    let userScore = 0;
+    let cpuScore = 0;
+    let cpuChoice = '';
+    let userChoice = '';
+    let roundNum = 0;
+    const userName = prompt("What is your name?");
+
+    for (i = 1; i < 6; i++)
+    {
+        roundNum = i;
+        console.log("ROUND: ", roundNum);
+
+        //user choice
+        userChoice = userSelection(); //I know this is repetetive since userChoice is global
+        
+        //cpu choice
+        cpuChoice = cpuSelection();
+
+        //battle
+        console.log(userName,": ", userChoice);
+        console.log("Cpu: ", cpuChoice);
+
+        if (userChoice == "rock")
+        {
+            if (cpuChoice == "rock") {console.log("DRAW!!!")}
+            else if (cpuChoice == "paper") {
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND")}
+            else if (cpuChoice == "scissor") {
+                userScore++;
+                console.log(userName, " WINS THIS ROUND");}
+        }
+        else if (userChoice == "paper")
+        {
+            if (cpuChoice == "rock") {
+                userScore++;
+                console.log(userName, " WINS THIS ROUND")}
+            else if (cpuChoice == "paper") {console.log("DRAW!!!")}
+            else if (cpuChoice == "scissor") {
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND");}
+        }
+        else if (userChoice == "scissor")
+        {
+            if (cpuChoice == "rock") {
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND");}
+            else if (cpuChoice == "paper") {
+                userScore++;
+                console.log(userName, " WINS THIS ROUND");}
+            else if (cpuChoice == "scissor") {console.log("DRAW!!!")}
+        }
+
+        console.log(userName, "score: ", userScore);
+        console.log("Cpu score: ", cpuScore);
+        console.log("")
+
+    }
+
+    if (userScore > cpuScore){ console.log(userName, "Wins!!")}
+    else if (userScore < cpuScore){ console.log("Cpu Wins!")}
+    else { console.log("Its a Tie!!!")}
+
+    
+
+    function userSelection()
+    {
+        userChoice = prompt("type in your move (rock, paper, scissor)");
+        userChoice = userChoice.toLowerCase();
+        return userChoice;
+    }
+
+    function cpuSelection()
+    {
+        let rand = randomIntFromInterval(1,3)
+        if (rand == 1){return "rock"}
+        else if (rand == 2){return "paper"}
+        else if (rand == 3){return "scissor"}
+    }
+
+    function randomIntFromInterval(min, max) 
+    { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    
+</script>
+</html>
