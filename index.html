@@ -1,13 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+
+
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    
+    <div class="intro">
+        <div class="title">Welcome to Rock Paper Scissors!</div>
+        <button class="start-btn">START!</button>
+    </div>
+
+    <div class="game">
+        <div class="top">
+            <div class="left-hand">handleft</div>
+            <div class="countdown">ready!</div>
+            <div class="right-hand">handRight</div>
+        </div>
+        <div class="bottom">
+            <div class="left-score">0</div>
+            <div class="buttons">
+                <button id="rock">Rock</button>
+                <button id="paper">paper</button>
+                <button id="scissor">scissor</button>
+            </div>
+            <div class="right-score">0</div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -18,85 +48,100 @@
     let cpuChoice = '';
     let userChoice = '';
     let roundNum = 0;
-    const userName = prompt("What is your name?");
 
-    for (i = 1; i < 6; i++)
+    let rock = document.getElementById('rock');
+    let paper = document.getElementById('paper');
+    let scissor = document.getElementById('scissor');
+
+    rock.addEventListener('click', choose());
+    paper.addEventListener('click', choose());
+    scissor.addEventListener('click', choose());
+
+    function choose()
     {
-        roundNum = i;
-        console.log("ROUND: ", roundNum);
+        console.log("test");
+    };
 
-        //user choice
-        userChoice = userSelection(); //I know this is repetetive since userChoice is global
+
+    // const userName = prompt("What is your name?");
+
+    // for (i = 1; i < 6; i++)
+    // {
+    //     roundNum = i;
+
+
+    //     //user choice
+    //     userChoice = userSelection(); //I know this is repetetive since userChoice is global
         
-        //cpu choice
-        cpuChoice = cpuSelection();
+    //     //cpu choice
+    //     cpuChoice = cpuSelection();
 
-        //battle
-        console.log(userName,": ", userChoice);
-        console.log("Cpu: ", cpuChoice);
+    //     //battle
+    //     console.log(userName,": ", userChoice);
+    //     console.log("Cpu: ", cpuChoice);
 
-        if (userChoice == "rock")
-        {
-            if (cpuChoice == "rock") {console.log("DRAW!!!")}
-            else if (cpuChoice == "paper") {
-                cpuScore++;
-                console.log("CPU WINS THIS ROUND")}
-            else if (cpuChoice == "scissor") {
-                userScore++;
-                console.log(userName, " WINS THIS ROUND");}
-        }
-        else if (userChoice == "paper")
-        {
-            if (cpuChoice == "rock") {
-                userScore++;
-                console.log(userName, " WINS THIS ROUND")}
-            else if (cpuChoice == "paper") {console.log("DRAW!!!")}
-            else if (cpuChoice == "scissor") {
-                cpuScore++;
-                console.log("CPU WINS THIS ROUND");}
-        }
-        else if (userChoice == "scissor")
-        {
-            if (cpuChoice == "rock") {
-                cpuScore++;
-                console.log("CPU WINS THIS ROUND");}
-            else if (cpuChoice == "paper") {
-                userScore++;
-                console.log(userName, " WINS THIS ROUND");}
-            else if (cpuChoice == "scissor") {console.log("DRAW!!!")}
-        }
+    //     if (userChoice == "rock")
+    //     {
+    //         if (cpuChoice == "rock") {console.log("DRAW!!!")}
+    //         else if (cpuChoice == "paper") {
+    //             cpuScore++;
+    //             console.log("CPU WINS THIS ROUND")}
+    //         else if (cpuChoice == "scissor") {
+    //             userScore++;
+    //             console.log(userName, " WINS THIS ROUND");}
+    //     }
+    //     else if (userChoice == "paper")
+    //     {
+    //         if (cpuChoice == "rock") {
+    //             userScore++;
+    //             console.log(userName, " WINS THIS ROUND")}
+    //         else if (cpuChoice == "paper") {console.log("DRAW!!!")}
+    //         else if (cpuChoice == "scissor") {
+    //             cpuScore++;
+    //             console.log("CPU WINS THIS ROUND");}
+    //     }
+    //     else if (userChoice == "scissor")
+    //     {
+    //         if (cpuChoice == "rock") {
+    //             cpuScore++;
+    //             console.log("CPU WINS THIS ROUND");}
+    //         else if (cpuChoice == "paper") {
+    //             userScore++;
+    //             console.log(userName, " WINS THIS ROUND");}
+    //         else if (cpuChoice == "scissor") {console.log("DRAW!!!")}
+    //     }
 
-        console.log(userName, "score: ", userScore);
-        console.log("Cpu score: ", cpuScore);
-        console.log("")
+    //     console.log(userName, "score: ", userScore);
+    //     console.log("Cpu score: ", cpuScore);
+    //     console.log("")
 
-    }
+    // }
 
-    if (userScore > cpuScore){ console.log(userName, "Wins!!")}
-    else if (userScore < cpuScore){ console.log("Cpu Wins!")}
-    else { console.log("Its a Tie!!!")}
+    // if (userScore > cpuScore){ console.log(userName, "Wins!!")}
+    // else if (userScore < cpuScore){ console.log("Cpu Wins!")}
+    // else { console.log("Its a Tie!!!")}
 
     
 
-    function userSelection()
-    {
-        userChoice = prompt("type in your move (rock, paper, scissor)");
-        userChoice = userChoice.toLowerCase();
-        return userChoice;
-    }
+    // function userSelection()
+    // {
+    //     userChoice = prompt("type in your move (rock, paper, scissor)");
+    //     userChoice = userChoice.toLowerCase();
+    //     return userChoice;
+    // }
 
-    function cpuSelection()
-    {
-        let rand = randomIntFromInterval(1,3)
-        if (rand == 1){return "rock"}
-        else if (rand == 2){return "paper"}
-        else if (rand == 3){return "scissor"}
-    }
+    // function cpuSelection()
+    // {
+    //     let rand = randomIntFromInterval(1,3)
+    //     if (rand == 1){return "rock"}
+    //     else if (rand == 2){return "paper"}
+    //     else if (rand == 3){return "scissor"}
+    // }
 
-    function randomIntFromInterval(min, max) 
-    { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-    }
+    // function randomIntFromInterval(min, max) 
+    // { // min and max included 
+    // return Math.floor(Math.random() * (max - min + 1) + min)
+    // }
     
 </script>
 </html>
