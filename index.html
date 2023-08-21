@@ -8,140 +8,295 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
 
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock-Paper-Scissors</title>
 </head>
 <body>
+    <!-- white screen for flash -->
+    <div id="overlay"></div>
+
+    <!-- Intro Screen -->
     <div class="intro">
         <div class="title">Welcome to Rock Paper Scissors!</div>
-        <button class="start-btn">START!</button>
+        <button id="start-btn">START!</button>
     </div>
 
+    <!-- Main game content -->
     <div class="game">
+        <!-- <div class="left-hands"><img src="./img/left-fist.png" alt="left fist"></div> -->
+        <!-- <div class="top-bar">stuff</div> -->
         <div class="top">
-            <div class="left-hand">handleft</div>
+            <div><img id="left-hand" src="./img/left-fist.png" alt="left fist"></div>
             <div class="countdown">ready!</div>
-            <div class="right-hand">handRight</div>
+            <div><img id="right-hand" src="./img/right-rock.png" alt="right rock"></div>
         </div>
         <div class="bottom">
-            <div class="left-score">0</div>
-            <div class="buttons">
+            <div id="left">
+                <div class="left-player">Player</div>
+                <div class="left-score">0</div>
+            </div>
+            <div class="buttons" img src="./img/eraser.png">
                 <button id="rock">Rock</button>
                 <button id="paper">paper</button>
-                <button id="scissor">scissor</button>
+                <button id="scissor">scissors</button>
             </div>
-            <div class="right-score">0</div>
+            <div id="right">
+                <div class="right-player">CPU</div>
+                <div class="right-score">0</div>
+            </div>
         </div>
+        <div class="buttons"><button id="ready-btn">Ready!</button></div>
     </div>
 </body>
 
 <script>
     //creating a rock paper scissors game that runs 5 rounds and prints the winner at the end
 
+    //notes to try and relearn this
+    /* We left off with a choose function that I believe returns the target Id we choose. Now we need to generate a random choose from the computer and then see if we win. Change scores and go again First to 5 wins the game. */
+
     let userScore = 0;
     let cpuScore = 0;
     let cpuChoice = '';
     let userChoice = '';
     let roundNum = 0;
+    let choiceMade = false;
+    let userName = 'mau';
 
     let rock = document.getElementById('rock');
     let paper = document.getElementById('paper');
     let scissor = document.getElementById('scissor');
+    let leftHand = document.querySelector('#left-hand');
+    let rightHand = document.querySelector('#right-hand');
 
-    rock.addEventListener('click', choose());
-    paper.addEventListener('click', choose());
-    scissor.addEventListener('click', choose());
+    let countDownTxt = document.querySelector('.countdown');
+    let leftScore = document.querySelector('.left-score');
+    let rightScore = document.querySelector('.right-score');
 
-    function choose()
+    let startBtn = document.querySelector('#start-btn');
+    let readyBtn = document.querySelector('#ready-btn');
+
+
+    rock.addEventListener('click', choose);
+    paper.addEventListener('click', choose);
+    scissor.addEventListener('click', choose);
+    startBtn.addEventListener('click', startScreen);
+    readyBtn.addEventListener('click', ready);
+    
+
+    //function returns chosen attribute. also sets choose to true 
+    function choose(e)
     {
-        console.log("test");
+        animateButton(e);
+
+        console.log(e.target);
+        choiceMade = true;
+        userChoice = e.target.id;
+        console.log(e.target.id);
+        // startMatch();
+    };
+
+    //signals game start
+    function ready(e)
+    {
+        //only activate if choice is clicked
+        if (choiceMade == true)
+        {
+            choiceMade = false;
+            e.target.classList.add('clicked');
+            console.log(e.target);
+            startMatch();
+        }
+    };
+
+    //display countdown text
+    function countDown(x)
+    {
+        let times = x + 1
+        switch(times)
+        {
+            case 1:
+                countDownTxt.textContent = "Rock!"
+                break;
+            case 2:
+                countDownTxt.textContent = "Paper!"
+                break;
+            case 3: 
+                countDownTxt.textContent = "Scissors!"
+                break;
+            case 4: 
+                countDownTxt.textContent = "Shoot!"
+                break;
+        }
+        if (times != 5) {
+            setTimeout(() => {
+                countDown(times);
+            }, 800);
+        }
+    }
+
+    //first step in hand animation before flash
+    function animateHands1()
+    {
+        //animate both fists 1.2.3
+        //switch fists quickly and white screen shoot
+        //maybe shade hands red/green for winning losing
+        //change score and reset
+        leftHand.src = './img/left-fist.png';
+        rightHand.src = './img/right-rock.png';
+
+        leftHand.classList.add('left-hand-rdy');
+        rightHand.classList.add('right-hand-rdy');
+
+        countDown(0);
+
+        const leftHandRdy = document.querySelector('.left-hand-rdy')
+        leftHandRdy.addEventListener('animationend', animateHands2);
+
     };
 
 
-    // const userName = prompt("What is your name?");
-
-    // for (i = 1; i < 6; i++)
-    // {
-    //     roundNum = i;
-
-
-    //     //user choice
-    //     userChoice = userSelection(); //I know this is repetetive since userChoice is global
+    //flash and final hand form
+    function animateHands2()
+    {
+        const overlay = document.querySelector('#overlay');
+        overlay.style.opacity = '1';
         
-    //     //cpu choice
-    //     cpuChoice = cpuSelection();
 
-    //     //battle
-    //     console.log(userName,": ", userChoice);
-    //     console.log("Cpu: ", cpuChoice);
+        setTimeout(() => {
+            overlay.style.opacity = '0';
+        }, 200);
 
-    //     if (userChoice == "rock")
-    //     {
-    //         if (cpuChoice == "rock") {console.log("DRAW!!!")}
-    //         else if (cpuChoice == "paper") {
-    //             cpuScore++;
-    //             console.log("CPU WINS THIS ROUND")}
-    //         else if (cpuChoice == "scissor") {
-    //             userScore++;
-    //             console.log(userName, " WINS THIS ROUND");}
-    //     }
-    //     else if (userChoice == "paper")
-    //     {
-    //         if (cpuChoice == "rock") {
-    //             userScore++;
-    //             console.log(userName, " WINS THIS ROUND")}
-    //         else if (cpuChoice == "paper") {console.log("DRAW!!!")}
-    //         else if (cpuChoice == "scissor") {
-    //             cpuScore++;
-    //             console.log("CPU WINS THIS ROUND");}
-    //     }
-    //     else if (userChoice == "scissor")
-    //     {
-    //         if (cpuChoice == "rock") {
-    //             cpuScore++;
-    //             console.log("CPU WINS THIS ROUND");}
-    //         else if (cpuChoice == "paper") {
-    //             userScore++;
-    //             console.log(userName, " WINS THIS ROUND");}
-    //         else if (cpuChoice == "scissor") {console.log("DRAW!!!")}
-    //     }
+        calculateMatch();
+        rightHand.classList.add('right-hand-shoot');
+        leftHand.classList.add('left-hand-shoot');
 
-    //     console.log(userName, "score: ", userScore);
-    //     console.log("Cpu score: ", cpuScore);
-    //     console.log("")
-
-    // }
-
-    // if (userScore > cpuScore){ console.log(userName, "Wins!!")}
-    // else if (userScore < cpuScore){ console.log("Cpu Wins!")}
-    // else { console.log("Its a Tie!!!")}
+        updateScore();
+        nextRound();
+    };
 
     
+    function animateButton(e)
+    {
+        //remove current button animation
+        rock.classList.remove('clicked');
+        paper.classList.remove('clicked');
+        scissor.classList.remove('clicked');
 
-    // function userSelection()
-    // {
-    //     userChoice = prompt("type in your move (rock, paper, scissor)");
-    //     userChoice = userChoice.toLowerCase();
-    //     return userChoice;
-    // }
+        //animate chosen button
+        e.target.classList.add('clicked');
 
-    // function cpuSelection()
-    // {
-    //     let rand = randomIntFromInterval(1,3)
-    //     if (rand == 1){return "rock"}
-    //     else if (rand == 2){return "paper"}
-    //     else if (rand == 3){return "scissor"}
-    // }
 
-    // function randomIntFromInterval(min, max) 
-    // { // min and max included 
-    // return Math.floor(Math.random() * (max - min + 1) + min)
-    // }
+    };
+
+    //hide start screen when clicked
+    function startScreen()
+    {
+        let intro = document.querySelector('.intro')
+        let game = document.querySelector('.game');
+        intro.setAttribute('style', 'display:none');
+        console.log("start hidden");
+        game.setAttribute('style', 'display:block')
+        console.log("game shown")
+
+
+    }
+
+    //function is called when user clicks on rock/paper/scissors.
+    //ready set go > results > score > nextround
+    function startMatch()
+    {
+        animateHands1();
+
+        cpuChoice = cpuSelection();
+        console.log("computer choice", cpuChoice);
+        console.log("user choice", userChoice);
+    }
+
+    //winner calculation
+    //set hand img
+    function calculateMatch()
+    {
+        if (userChoice == "rock")
+        {
+            if (cpuChoice == "rock") {console.log("DRAW!!!")}
+            else if (cpuChoice == "paper") {
+                rightHand.src= './img/right-paper.png';
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND")}
+            else if (cpuChoice == "scissor") {
+                rightHand.src= './img/right-scissors.png'
+                userScore++;
+                console.log(userName, " WINS THIS ROUND");}
+        }
+        else if (userChoice == "paper")
+        {
+            leftHand.src = './img/left-paper.png';
+            if (cpuChoice == "rock") {
+                userScore++;
+                console.log(userName, " WINS THIS ROUND")}
+            else if (cpuChoice == "paper") {
+                rightHand.src= './img/right-paper.png';
+                console.log("DRAW!!!")}
+            else if (cpuChoice == "scissor") {
+                rightHand.src= './img/right-scissors.png'
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND");}
+        }
+        else if (userChoice == "scissor")
+        {
+            leftHand.src= './img/left-scissors.png';
+            if (cpuChoice == "rock") {
+                cpuScore++;
+                console.log("CPU WINS THIS ROUND");}
+            else if (cpuChoice == "paper") {
+                rightHand.src= './img/right-paper.png';
+                userScore++;
+                console.log(userName, " WINS THIS ROUND");}
+            else if (cpuChoice == "scissor") {
+                rightHand.src= './img/right-scissors.png'
+                console.log("DRAW!!!")}
+        }
+    }
+
+    function updateScore()
+    {
+        leftScore.textContent = userScore;
+        rightScore.textContent = cpuScore;
+    }
+
+    //reset buttons/hands/text for next round
+    function nextRound()
+    {
+        rock.classList.remove('clicked');
+        paper.classList.remove('clicked');
+        scissor.classList.remove('clicked');
+        readyBtn.classList.remove('clicked');
+        leftHand.classList.remove('left-hand-rdy');
+        rightHand.classList.remove('right-hand-rdy');
+        rightHand.classList.remove('right-hand-shoot');
+        leftHand.classList.remove('left-hand-shoot');
+    }
+
+
+    function cpuSelection()
+    {
+        let rand = randomIntFromInterval(1,3)
+        if (rand == 1){return "rock"}
+        else if (rand == 2){return "paper"}
+        else if (rand == 3){return "scissor"}
+    }
+
+    function randomIntFromInterval(min, max) 
+    { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+    }
     
 </script>
 </html>

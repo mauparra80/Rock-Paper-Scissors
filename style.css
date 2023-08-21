@@ -1,25 +1,68 @@
-*
+/* new idea is to make it look like a chalkboard with chalk writting  */
+
+
+#overlay
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    pointer-events: none; /*Allow interaction with elements beneath..?*/
+    transition: opacity 0.5s ease-out;
+    z-index: 99;
+}
+
+body
+{
+    background-image: url("./img/white-wall.jpg.jpg");
+    background-position: center;
+    background-size: cover;
+    margin: 0 5%;
+}
+
+/* @media (min-width: 3000px)
+{
+    body
+    {
+        margin: 0 10%;
+    }
+} */
+
+* div
 {
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: #1e1e1e;
+    /* background-color: #1f231f; */
     color: white;
-    border: solid 2px red;
+    /* border: solid 2px red; */
 }
+
 
 .intro
 {
-    padding-top: 100px;
+    
+    padding: 100px 50px 50px 50px;
     width: 50%;
     text-align: center;
     display: flex;
-    display:none;
+    display:'';
     flex-direction: column;
     justify-content: center;
     margin: auto;
-    font-family: 'Tilt Prism', cursive;
+    margin-top: 100px;
+    font-family: 'Shadows Into Light', cursive;
     font-weight: 500;
+
+    background-color: rgb(32, 49, 33);
+    border: .5vw solid rgb(42, 21, 5);
+    border-style: inset;
+    border-bottom: 1.5vw solid rgb(69, 34, 9);
+    outline: 15px solid rgb(93, 45, 11);
+    box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.7);
 }
 
 .title
@@ -29,17 +72,19 @@
     border-radius: 10%;
     box-shadow: 0 0 5px white;
     padding: 10px;
-    font-family: 'Tilt Prism', cursive;
-    font-size: 50px;
+    font-size: 5vw;
+    font-family: 'Shadows Into Light', cursive;
 }
 
-.start-btn
+#start-btn
 {
     font-family: 'Tilt Prism', cursive;
+    background-color:rgb(154, 87, 39);
+    color: white;
     font-size: 50px;
     padding: 10px;
     margin-top: 30px;
-    box-shadow: 0 0 10px yellow;
+    box-shadow: 0 0 10px #ffffff;
     border-radius: 5px;
     flex: 0 0;
     align-self: center;
@@ -49,20 +94,58 @@
 .game
 {
     text-align: center;
+    /* display: none; */
+    /* margin-top: 2em; */
+    /* max-width: 2500px; */
+    display: none;
+    flex-direction: column;
+    background-color: rgb(32, 49, 33);
+    border: .5vw solid rgb(42, 21, 5);
+    border-style: inset;
+    border-bottom: 1.5vw solid rgb(69, 34, 9);
+    outline: 15px solid rgb(93, 45, 11);
+    box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    padding-bottom: 50px;
+    margin-top: 50px;
 }
 
 .game *
 {
-    font-family: 'Tilt Prism', cursive;
+    font-family: 'Shadows Into Light', cursive;
 }
+
+
+/* .top-bar
+{
+    min-height: 4em;
+    z-index: 990; 
+    background-color: rgb(97, 49, 12);
+    border: 10px solid rgb(69, 35, 9);
+    border-style: inset;
+    color: rgb(255, 255, 255);
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    left: 0; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden;
+} */
+
 
 .top
 {
     display: flex;
     justify-content: space-between;
-    font-size: 100px;
-    margin-top: 200px;
-    
+    font-size: 5vw;
+    /* margin-top: -1em; */
+    /* margin-bottom: -2em; */
+    /* padding-top: -100px; */
+    overflow: hidden;
+    z-index: 90;
+    align-items: center;
 }
 
 .bottom
@@ -70,15 +153,156 @@
     display: flex;
     justify-content: space-evenly;
     font-size: 100px;
-    margin-top: 50px;
+    z-index: 90;
+    /* margin-top: 50px; */
+    align-items: center;
 }
 
 .buttons *
 {
-    border: 5px solid white;
-    border-radius: 5px;
-    box-shadow: 0 0 5px white;
-    width: 20vw;
+    align-self: normal;
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    outline: none; /* Remove focus outline */
+    background: url('./img/eraser.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center; 
+    width: 15vw;
+    height: 6vw;
+     /* Set a fixed height to maintain the aspect ratio of the image */
+    /* margin: 20px; */
+    
+    font-size: 3vw;
+    color: white;
+    flex-grow: 0;
+}
+
+button:hover{
+    transform: scale(1.1);
+}
+
+.buttons .img{
+    height: 20vw;
+}
+
+
+.clicked
+{
+    transform: scale(.8);
+    box-shadow: 0px 30px 20px -10px rgba(206, 206, 206, 0.519);
+}
+
+@keyframes left-rotate {
+    0% { transform: rotateZ(-70deg); }
+    40% { transform: rotateZ(10deg); }
+    100% { transform: rotateZ(-70deg); }
+}
+
+@keyframes right-rotate {
+    0% { transform: rotateZ(70deg); }
+    40% { transform: rotateZ(-10deg); }
+    100% { transform: rotateZ(70deg); }
+}
+
+@keyframes right-hand-shoot {
+    0% { transform: rotateZ(70deg);}
+    100% { transform: rotateZ(0deg);}
+}
+
+@keyframes left-hand-shoot {
+    0% { transform: rotateZ(-70deg);}
+    100% { transform: rotateZ(0deg);}
+}
+
+#right-hand
+{
+    background-color: rgba(0, 0, 0, 0);
+    margin-right: -35vw;
+    margin-top: -5vw;
+    margin-bottom: -13vw;
+    width: 60vw;
+    overflow: hidden;
+}
+
+#left-hand
+{
+    background-color: rgba(0, 0, 0, 0);
+    margin-left: -35vw;
+    margin-top: -5vw;
+    margin-bottom: -13vw;
+    width: 60vw;
+    position: relative;
+    overflow: hidden;
+}
+
+#right-hand img 
+{
+    /* z-index: -1; */
+    
+    /* margin-bottom: -200px; */
+    position: absolute;
+    background-color: rgba(171, 177, 48, 1);
+    overflow: hidden;
+    right: -20vw;
+    z-index: 999;
+}
+
+#left-hand img {
+    width: 40vw;
+    margin-top: -200px;
+    margin-bottom: -200px;
+    position: relative;
+    background-color: rgba(0,0,0,0.0);
+    z-index: 999;
+}
+
+.left-hand-rdy
+{
+    
+    /* position: relative; */
+    animation-name: left-rotate;
+    animation-duration: .8s;
+    animation-iteration-count: 3;
+    
+}
+
+.right-hand-rdy
+{
+    
+    /* position: relative; */
+    animation-name: right-rotate;
+    animation-duration: .8s;
+    animation-iteration-count: 3;
+    
+}
+
+.right-hand-shoot
+{
+    animation-name: right-hand-shoot;
+    animation-duration: .1s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.left-hand-shoot
+{
+    animation-name: left-hand-shoot;
+    animation-duration: .1s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.left-score, .right-score
+{
+    font-size: 150px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+}
+
+#left, #right
+{
     font-size: 5vw;
-    padding: 0 10px 0 10px;
+
 }
