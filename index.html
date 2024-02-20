@@ -168,12 +168,13 @@
         const overlay = document.querySelector('#overlay');
         overlay.style.opacity = '1';
         
+        calculateMatch();
 
         setTimeout(() => {
             overlay.style.opacity = '0';
-        }, 200);
+        }, 300);
 
-        calculateMatch();
+        
         rightHand.classList.add('right-hand-shoot');
         leftHand.classList.add('left-hand-shoot');
 

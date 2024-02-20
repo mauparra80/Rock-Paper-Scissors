@@ -1,5 +1,3 @@
-/* new idea is to make it look like a chalkboard with chalk writting  */
-
 
 #overlay
 {
@@ -21,15 +19,9 @@ body
     background-position: center;
     background-size: cover;
     margin: 0 5%;
+    height: 100vh;
+    overflow: hidden;
 }
-
-/* @media (min-width: 3000px)
-{
-    body
-    {
-        margin: 0 10%;
-    }
-} */
 
 * div
 {
@@ -38,9 +30,9 @@ body
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     /* background-color: #1f231f; */
     color: white;
+    box-sizing: border-box;
     /* border: solid 2px red; */
 }
-
 
 .intro
 {
@@ -84,19 +76,19 @@ body
     font-size: 50px;
     padding: 10px;
     margin-top: 30px;
-    box-shadow: 0 0 10px #ffffff;
+    box-shadow: 0 0 10px #ffffff83;
     border-radius: 5px;
     flex: 0 0;
     align-self: center;
+}
+#start-btn:hover{
+  box-shadow: 2px 2px 10px #ffffff72;
 }
 
 /* Game Page */
 .game
 {
     text-align: center;
-    /* display: none; */
-    /* margin-top: 2em; */
-    /* max-width: 2500px; */
     display: none;
     flex-direction: column;
     background-color: rgb(32, 49, 33);
@@ -106,34 +98,16 @@ body
     outline: 15px solid rgb(93, 45, 11);
     box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.7);
     overflow: hidden;
-    padding-bottom: 50px;
     margin-top: 50px;
+    padding-bottom: 50px;
+    max-width: 1500px;
+    max-height: 900vh;
 }
 
 .game *
 {
     font-family: 'Shadows Into Light', cursive;
 }
-
-
-/* .top-bar
-{
-    min-height: 4em;
-    z-index: 990; 
-    background-color: rgb(97, 49, 12);
-    border: 10px solid rgb(69, 35, 9);
-    border-style: inset;
-    color: rgb(255, 255, 255);
-    position: fixed; 
-    width: 100%; 
-    top: 0; 
-    left: 0; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    overflow: hidden;
-} */
-
 
 .top
 {
@@ -181,6 +155,10 @@ body
 button:hover{
     transform: scale(1.1);
 }
+button:active {
+  transform: scale(.9);
+  box-shadow: 0px 30px 20px -10px rgba(206, 206, 206, 0.519);
+}
 
 .buttons .img{
     height: 20vw;
@@ -189,7 +167,7 @@ button:hover{
 
 .clicked
 {
-    transform: scale(.8);
+    transform: scale(.9);
     box-shadow: 0px 30px 20px -10px rgba(206, 206, 206, 0.519);
 }
 
