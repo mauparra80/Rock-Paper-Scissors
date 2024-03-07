@@ -11,7 +11,7 @@ A basic module that emulates the game of rock paper scissors against a CPU.
 </td>
 <td align="right">
 
-[![Live Preview](./src/assets/livePreview.png)](https://mauparra80.github.io/Rock-Paper-Scissors/)
+[![Live Preview](./imgs/livePreview.png)](https://mauparra80.github.io/Rock-Paper-Scissors/)
 
 </td>
 </tr>
